@@ -306,24 +306,25 @@ public class Main {
             	   if (markers.size() == 3){
             		   List<Point> orderedMarkers = orderPoints(centersofmarkers);
 
-            		   Point top = 		orderedMarkers.get(0);
-            		   Point right = 	orderedMarkers.get(1);
-            		   Point left = 	orderedMarkers.get(2);
+            		   Point topleft = 		orderedMarkers.get(0);
+            		   Point topright = 	orderedMarkers.get(1);
+            		   Point bottomleft = 	orderedMarkers.get(2);
+            		   Point bottomright =  new Point();
       		   
-            		   int width = (int) Math.abs(distance(right, top));
-            		   int height = (int) Math.abs(distance(left, top));
+            		   int width = (int) Math.abs(distance(topright, topleft));
+            		   int height = (int) Math.abs(distance(bottomleft, topleft));
             		   //System.out.println("width is  " + width + " and height is "  + height);
               		   
-            		   //Center of QR Code is mean between right and left
-            		   Point center = new Point((left.x+right.x) / 2, (left.y+right.y) / 2);
+            		   //Center of QR Code is mean between topright and left
+            		   Point center = new Point((bottomleft.x+topright.x) / 2, (bottomleft.y+topright.y) / 2);
             		   
-            		   Point centerSearchRect = new Point(center.x + 0.7*(center.x - top.x), center.y + 0.7*(center.y - top.y));
+            		   Point centerSearchRect = new Point(center.x + 0.7*(center.x - topleft.x), center.y + 0.7*(center.y - topleft.y));
               		
             		   //draw rect where fourth marker should be
-            		   Point topleft = 	new Point(centerSearchRect.x-(width/4), centerSearchRect.y-(height/4));
-            		   Point bottomright = new Point(centerSearchRect.x+(width/4), centerSearchRect.y+(height/4));             		    
-            		   Core.rectangle(webcam_image, topleft, bottomright, red);
-            		   Rect rect = new Rect(topleft, bottomright);
+            		   Point recttopleft = new Point(centerSearchRect.x-(width/4), centerSearchRect.y-(height/4));
+            		   Point rectbottomright = new Point(centerSearchRect.x+(width/4), centerSearchRect.y+(height/4));             		    
+            		   Core.rectangle(webcam_image, recttopleft, rectbottomright, red);
+            		   Rect rect = new Rect(recttopleft, rectbottomright);
               		   
             		   alignmentmarkers = CM.getNestedContours(3);
             		   //Iterate over markerlist
@@ -342,9 +343,9 @@ public class Main {
             		   	}
             		    alignmentmarkers.clear();
             		   
-            		   	Point four = new Point();
+            		   	
             		   	if (markers != null && !markers.isEmpty()){
-            		   		four = centerofmarkers(markers).get(markers.size()-1);
+            		   		bottomright = centerofmarkers(markers).get(markers.size()-1);
 			   			}
             		   	centersofmarkers.add(centerofmarkers(markers).get(markers.size()-1));
  	
@@ -354,16 +355,16 @@ public class Main {
             		   	//Core.putText(webcam_image, "Slope: "+ ((slope > 0) ? "+" : "-"), new Point(20, 130), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
             		   	//Core.putText(webcam_image, "Dist:  "+ ((dist > 0) ? "+" : "-"), new Point(20, 160), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
     			
-            		   	Core.putText(webcam_image, "Top", new Point(top.x+20, top.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-            		   	Core.putText(webcam_image, "Left", new Point(left.x+20, left.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-            		   	Core.putText(webcam_image, "Right", new Point(right.x+20, right.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);  
+            		   	Core.putText(webcam_image, "Topleft", new Point(topleft.x+20, topleft.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	Core.putText(webcam_image, "Bottomleft", new Point(bottomleft.x+20, bottomleft.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	Core.putText(webcam_image, "Topight", new Point(topright.x+20, topright.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);  
          		   
             		   	MatOfPoint2f src = new MatOfPoint2f();
             		   	Point srcpoint[] = new Point[4];               	   
-            		   	srcpoint[0] = top;
-            		   	srcpoint[1] = right;
-            		   	srcpoint[2] = left;
-            		   	srcpoint[3] = four;       	
+            		   	srcpoint[0] = topleft;
+            		   	srcpoint[1] = topright;
+            		   	srcpoint[2] = bottomleft;
+            		   	srcpoint[3] = bottomright;       	
             		   	src.fromArray(srcpoint);
             		   
             		   	MatOfPoint2f dst = new MatOfPoint2f();            		    		   
@@ -587,25 +588,25 @@ public class Main {
 		
 		public static List<Point> orderPoints(List<Point> Points)
 		{
-			//Final Order should be {Top, Right, Left}
+			//Final Order should be {Topleft, Topright, Bottomleft}
 			List<Point> orderedPoints = new ArrayList<Point>();
-			Point top, unknownMarker1, unknownMarker2;
+			Point topleft, unknownMarker1, unknownMarker2;
 			
-			//point between short sides should be the top marker
- 		    top = getPointBetweenShortSides(Points);
+			//point between short sides should be the topleft marker
+ 		    topleft = getPointBetweenShortSides(Points);
  		    //put top at the list end
- 		    Points.remove(top); 
+ 		    Points.remove(topleft); 
 			
 			unknownMarker1 	= Points.get(0);
 			unknownMarker2 	= Points.get(1);
 		   	
-			double dist = cv_lineEquation(unknownMarker1, unknownMarker2, top);	// Get the Perpendicular distance of the outlier from the longest side			
+			double dist = cv_lineEquation(unknownMarker1, unknownMarker2, topleft);	// Get the Perpendicular distance of the outlier from the longest side			
 			float slope = lineSlopeFromPoints(unknownMarker1, unknownMarker2);		// Also calculate the slope of the longest side
 				
 			// Now that we have the orientation of the line formed median1 & median2 and we also have the position of the outlier w.r.t. the line
-			// Determine the 'right' and 'bottom' markers
+			// Determine the 'topright' and 'bottomleft' markers
 
-			orderedPoints.add(top);
+			orderedPoints.add(topleft);
 	
 			if (slope <= 0 && dist <= 0 ){			// Orientation - North
 				orderedPoints.add(unknownMarker2);
