@@ -358,7 +358,6 @@ public class Main {
             		   	//Core.putText(webcam_image, "Slope: "+ ((slope > 0) ? "+" : "-"), new Point(20, 130), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
             		   	//Core.putText(webcam_image, "Dist:  "+ ((dist > 0) ? "+" : "-"), new Point(20, 160), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
     			
-            		   	Core.circle(webcam_image, top, 10, red, 2);
             		   	Core.putText(webcam_image, "Top", new Point(top.x+20, top.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
             		   	Core.putText(webcam_image, "Left", new Point(left.x+20, left.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
             		   	Core.putText(webcam_image, "Right", new Point(right.x+20, right.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);  
@@ -383,11 +382,6 @@ public class Main {
             		    
             		   	Mat PerspectiveMat = Imgproc.getPerspectiveTransform(src, dst);            		   
             		   	Imgproc.warpPerspective(webcam_image, qr_image, PerspectiveMat, new Size(400,400), Imgproc.INTER_CUBIC);
-            		   	//Imgproc.cvtColor(qr_image, qr_image, Imgproc.COLOR_RGB2GRAY);
-            		   	//Imgproc.GaussianBlur(qr_image, qr_image, new Size(15,15), 0);
-            		   	//Imgproc.adaptiveThreshold(qr_image, qr_image, 255.0, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 31, 2);
-            		   	//Imgproc.threshold(qr_image, qr_image,127,255,Imgproc.THRESH_BINARY);
-
             	   }
             	   
             	   //for(int i = 0; i < markers.size(); i++){
