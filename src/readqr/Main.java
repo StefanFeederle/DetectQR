@@ -356,8 +356,9 @@ public class Main {
             		   	//Core.putText(webcam_image, "Dist:  "+ ((dist > 0) ? "+" : "-"), new Point(20, 160), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
     			
             		   	Core.putText(webcam_image, "Topleft", new Point(topleft.x+20, topleft.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	Core.putText(webcam_image, "Topright", new Point(topright.x+20, topright.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2); 
             		   	Core.putText(webcam_image, "Bottomleft", new Point(bottomleft.x+20, bottomleft.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-            		   	Core.putText(webcam_image, "Topight", new Point(topright.x+20, topright.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);  
+            		   	Core.putText(webcam_image, "Bottomright", new Point(bottomright.x+20, bottomright.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);  
          		   
             		   	MatOfPoint2f src = new MatOfPoint2f();
             		   	Point srcpoint[] = new Point[4];               	   
