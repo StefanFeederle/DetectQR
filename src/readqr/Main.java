@@ -343,91 +343,50 @@ public class Main {
             			   }
             				  
             		   	}
+            		    testMarkers = dropmarkersbypoly(testMarkers, 4, webcam_image, green);
             		   	Point four = new Point();
             		   	if (testMarkers != null && !testMarkers.isEmpty()){
             		   		four = centerofmarkers(testMarkers).get(0);
 			   			}
             		   	testMarkers.clear();
-            		   
-            		   
-//              		Point four = new Point();
-//                	if (contours != null && !contours.isEmpty() && hierarchy != null && !hierarchy.empty() ) {
-//                		for ( int i = 0; i < contours.size(); i++ ){
-//                			if(contours.get(i).toList().get(0).inside(rect)){
-//                				   
-//                				int iBuff1[] = new int[ (int) (4)];
-//        	            		hierarchy.get(0, i, iBuff1);
-//        	            		if (iBuff1[3] != -1 && contours.get(iBuff1[3]).toList().get(0).inside(rect)){ 
-//        	            			//MatOfPoint abc = new MatOfPoint(makepoly(contours.get(iBuff1[2])));
-//        	            			//System.out.println("This poly has " + abc.total());
-//        	            			//if(abc.total() != 4){System.out.println("Going to drop it."); continue looper;}
-//        	            			dummy.add(contours.get(iBuff1[3])); 
-//        	            			//dummy.add(abc); 
-//        	            			   
-//        	            			int iBuff2[] = new int[ (int) (4)];
-//        	            			hierarchy.get(0, iBuff1[3], iBuff2);
-//        	            			if (iBuff2[3] != -1 && contours.get(iBuff2[3]).toList().get(0).inside(rect)){  
-//        	            				dummy.add(contours.get(iBuff2[3])); 
-//        	            				   
-//        	            				int iBuff3[] = new int[ (int) (4)];
-//        	                			hierarchy.get(0, iBuff2[3], iBuff3);
-//        	                				if (iBuff3[3] != -1 && contours.get(iBuff3[3]).toList().get(0).inside(rect)){
-//        	                        			dummy.add(contours.get(iBuff3[3])); 
-//        	                        			Imgproc.drawContours( webcam_image, contours, iBuff3[3], red, 1);
-//        	                        				   //System.out.println("dummy size is "+dummy.size());
-//        	                        				   //System.out.println("ID "+iBuff3[3]+" is an aligment marker.");
-//        	                        				   //cascades.addAll(dummy);
-//        	                        			alignmentmarkers.add(new ArrayList<MatOfPoint>(dummy));
-//        	                        			alignmentmarkers = dropmarkersbypoly(alignmentmarkers, 4, webcam_image, green);
-//        	                        				if (alignmentmarkers != null && !alignmentmarkers.isEmpty()){
-//        	                        					four = centerofmarkers(alignmentmarkers).get(0);
-//        	                			   			}
-//        	                        		}     
-//        	                    	}	     
-//        	                	}	   
-//        	            		dummy.clear();   	
-//                			}
-//                		}
-//                	}
-                	   
+ 	
                 	
-                	
-         		   Core.circle(webcam_image,center, 4, new Scalar(0,255,0,255));
-         		   Core.circle(webcam_image,centerSearchRect, 4, new Scalar(255,0,0,255));   
-        		   drawlinesbetweenpoints(webcam_image, orderedMarkers); 
-        		   //Core.putText(webcam_image, "Slope: "+ ((slope > 0) ? "+" : "-"), new Point(20, 130), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-        		   //Core.putText(webcam_image, "Dist:  "+ ((dist > 0) ? "+" : "-"), new Point(20, 160), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	Core.circle(webcam_image,center, 4, new Scalar(0,255,0,255));
+            		   	Core.circle(webcam_image,centerSearchRect, 4, new Scalar(255,0,0,255));   
+            		   	drawlinesbetweenpoints(webcam_image, orderedMarkers); 
+            		   	//Core.putText(webcam_image, "Slope: "+ ((slope > 0) ? "+" : "-"), new Point(20, 130), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	//Core.putText(webcam_image, "Dist:  "+ ((dist > 0) ? "+" : "-"), new Point(20, 160), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
     			
-        		   Core.circle(webcam_image, top, 10, red, 2);
-        		   Core.putText(webcam_image, "Top", new Point(top.x+20, top.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-        		   Core.putText(webcam_image, "Left", new Point(left.x+20, left.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-        		   Core.putText(webcam_image, "Right", new Point(right.x+20, right.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);  
+            		   	Core.circle(webcam_image, top, 10, red, 2);
+            		   	Core.putText(webcam_image, "Top", new Point(top.x+20, top.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	Core.putText(webcam_image, "Left", new Point(left.x+20, left.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	Core.putText(webcam_image, "Right", new Point(right.x+20, right.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);  
          		   
          		   
-            		   MatOfPoint2f src = new MatOfPoint2f();
-            		   Point srcpoint[] = new Point[4];               	   
-                	   srcpoint[0] = top;
-            		   srcpoint[1] = right;
-            		   srcpoint[2] = left;
-            		   srcpoint[3] = four;       	
-            		   src.fromArray(srcpoint);
+            		   	MatOfPoint2f src = new MatOfPoint2f();
+            		   	Point srcpoint[] = new Point[4];               	   
+            		   	srcpoint[0] = top;
+            		   	srcpoint[1] = right;
+            		   	srcpoint[2] = left;
+            		   	srcpoint[3] = four;       	
+            		   	src.fromArray(srcpoint);
             		   
-            		   MatOfPoint2f dst = new MatOfPoint2f();            		    		   
-            		   Point dstpoint[] = new Point[4];           		   
-            		   dstpoint[0] = new Point (70,70);
-            		   dstpoint[1] = new Point (330,70);
-            		   dstpoint[2] = new Point (70,330);
-            		   //dstpoint[3] = new Point (330,330);
-            		   dstpoint[3] = new Point (286,286);
+            		   	MatOfPoint2f dst = new MatOfPoint2f();            		    		   
+            		   	Point dstpoint[] = new Point[4];           		   
+            		   	dstpoint[0] = new Point (70,70);
+            		   	dstpoint[1] = new Point (330,70);
+            		   	dstpoint[2] = new Point (70,330);
+            		   	//dstpoint[3] = new Point (330,330);
+            		   	dstpoint[3] = new Point (286,286);
             		   
-            		   dst.fromArray(dstpoint);
+            		   	dst.fromArray(dstpoint);
             		    
-            		   Mat PerspectiveMat = Imgproc.getPerspectiveTransform(src, dst);            		   
-            		   Imgproc.warpPerspective(webcam_image, qr_image, PerspectiveMat, new Size(400,400), Imgproc.INTER_CUBIC);
-            		   //Imgproc.cvtColor(qr_image, qr_image, Imgproc.COLOR_RGB2GRAY);
-            		   //Imgproc.GaussianBlur(qr_image, qr_image, new Size(15,15), 0);
-            		   //Imgproc.adaptiveThreshold(qr_image, qr_image, 255.0, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 31, 2);
-            		   //Imgproc.threshold(qr_image, qr_image,127,255,Imgproc.THRESH_BINARY);
+            		   	Mat PerspectiveMat = Imgproc.getPerspectiveTransform(src, dst);            		   
+            		   	Imgproc.warpPerspective(webcam_image, qr_image, PerspectiveMat, new Size(400,400), Imgproc.INTER_CUBIC);
+            		   	//Imgproc.cvtColor(qr_image, qr_image, Imgproc.COLOR_RGB2GRAY);
+            		   	//Imgproc.GaussianBlur(qr_image, qr_image, new Size(15,15), 0);
+            		   	//Imgproc.adaptiveThreshold(qr_image, qr_image, 255.0, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 31, 2);
+            		   	//Imgproc.threshold(qr_image, qr_image,127,255,Imgproc.THRESH_BINARY);
 
             	   }
             	   
