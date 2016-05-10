@@ -238,7 +238,8 @@ public class Main {
             	   ContourManager CM = new ContourManager(contours, hierarchy);
 
             	   //markers = findNestedContours(contours, hierarchy, 5);
-            	   markers = CM.findNestedContours(5);
+            	   CM.buildNestedContours();
+            	   markers = CM.getNestedContours(5);
             	   //System.out.println("found "+markers.size()+" contours");
 
             	   for ( int i = 0; i < contours.size(); i++ ){
@@ -328,7 +329,7 @@ public class Main {
             		   Core.rectangle(webcam_image, topleft, bottomright, red);
             		   Rect rect = new Rect(topleft, bottomright);
               		   
-            		   alignmentmarkers = CM.findNestedContours(3);
+            		   alignmentmarkers = CM.getNestedContours(3);
             		   //Iterate over markerlist
             		   for ( int i = 0; i < alignmentmarkers.size(); i++ ){   
             			   List<MatOfPoint> currentMarker = alignmentmarkers.get(i);		//Get marker

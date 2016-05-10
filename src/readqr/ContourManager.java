@@ -34,18 +34,22 @@ public class ContourManager {
 		}
 	}
 	
-	public List<List<MatOfPoint>> findNestedContours(int nestingDepth){
+	public void buildNestedContours(){
 		markers.clear();
 		for ( int i = 0; i < this.contours.size(); i++ ){
 			this.findAndAddChildren(i);
-			//System.out.println(this.tmpContours.size());
-			if(this.tmpContours.size() == nestingDepth)
 			this.markers.add(new ArrayList<MatOfPoint>(this.tmpContours));
 			this.tmpContours.clear();
 		}
-		return markers;
 	}
 	
-	
-	
+	public List<List<MatOfPoint>> getNestedContours(int nestingDepth){
+		List<List<MatOfPoint>> nestedContours = new ArrayList<List<MatOfPoint>>();
+		for ( int i = 0; i < this.markers.size(); i++ ){
+			if(this.markers.get(i).size() == nestingDepth){
+				nestedContours.add(new ArrayList<MatOfPoint>(this.markers.get(i)));
+			}
+		}
+		return nestedContours;
+	}
 }
