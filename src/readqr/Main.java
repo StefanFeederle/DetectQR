@@ -184,7 +184,6 @@ public class Main {
 
        List<List<MatOfPoint>> markers = new ArrayList<List<MatOfPoint>>();
        List<List<MatOfPoint>> alignmentmarkers = new ArrayList<List<MatOfPoint>>();
-       List<List<MatOfPoint>> testMarkers = new ArrayList<List<MatOfPoint>>();
        List<Point> centersofmarkers = new ArrayList<Point>();
        List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
        
@@ -333,7 +332,7 @@ public class Main {
             			   MatOfPoint biggestContour = currentMarker.get(0);				//Get biggest contour
             			   
             			   if(allPointsInRect(biggestContour, rect)){
-            				   testMarkers.add(new ArrayList<MatOfPoint>(currentMarker));
+            				   markers.add(new ArrayList<MatOfPoint>(currentMarker));
             				   //Imgproc.drawContours( webcam_image, currentMarker, currentMarker.indexOf(currentMarker.get(0)), green, 1);
             				   //alignmentmarkers = dropmarkersbypoly(alignmentmarkers, 4, webcam_image, green);
             			   }else {
@@ -341,14 +340,12 @@ public class Main {
             			   }
             				  
             		   	}
-            		    testMarkers = dropmarkersbypoly(testMarkers, 4, webcam_image, green);
+            		   
             		   	Point four = new Point();
-            		   	if (testMarkers != null && !testMarkers.isEmpty()){
-            		   		four = centerofmarkers(testMarkers).get(0);
+            		   	if (markers != null && !markers.isEmpty()){
+            		   		four = centerofmarkers(markers).get(markers.size()-1);
 			   			}
-            		   	testMarkers.clear();
  	
-                	
             		   	Core.circle(webcam_image,center, 4, new Scalar(0,255,0,255));
             		   	Core.circle(webcam_image,centerSearchRect, 4, new Scalar(255,0,0,255));   
             		   	drawlinesbetweenpoints(webcam_image, orderedMarkers); 
@@ -358,7 +355,6 @@ public class Main {
             		   	Core.putText(webcam_image, "Top", new Point(top.x+20, top.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
             		   	Core.putText(webcam_image, "Left", new Point(left.x+20, left.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
             		   	Core.putText(webcam_image, "Right", new Point(right.x+20, right.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);  
-         		   
          		   
             		   	MatOfPoint2f src = new MatOfPoint2f();
             		   	Point srcpoint[] = new Point[4];               	   
