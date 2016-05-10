@@ -377,8 +377,7 @@ public class Main {
             		   	dstpoint[0] = new Point (70,70);
             		   	dstpoint[1] = new Point (330,70);
             		   	dstpoint[2] = new Point (70,330);
-            		   	//dstpoint[3] = new Point (330,330);
-            		   	dstpoint[3] = new Point (286,286);
+            		   	dstpoint[3] = new Point (300,300);
             		   
             		   	dst.fromArray(dstpoint);
             		    
