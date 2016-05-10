@@ -340,6 +340,7 @@ public class Main {
             			   }
             				  
             		   	}
+            		    alignmentmarkers.clear();
             		   
             		   	Point four = new Point();
             		   	if (markers != null && !markers.isEmpty()){
@@ -394,7 +395,6 @@ public class Main {
             	   long drawTime = System.nanoTime();
             	   contours.clear();
             	   markers.clear();
-            	   alignmentmarkers.clear();
             	   
             	   Imgproc.resize(webcam_image, webcam_image, new Size(720, 405));
         		   facePanel.matToBufferedImage(webcam_image);  
