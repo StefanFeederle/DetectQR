@@ -352,13 +352,13 @@ public class Main {
             		   	Core.circle(webcam_image,center, 4, new Scalar(0,255,0,255));
             		   	Core.circle(webcam_image,centerSearchRect, 4, new Scalar(255,0,0,255));   
             		   	drawlinesbetweenpoints(webcam_image, orderedMarkers); 
-            		   	//Core.putText(webcam_image, "Slope: "+ ((slope > 0) ? "+" : "-"), new Point(20, 130), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-            		   	//Core.putText(webcam_image, "Dist:  "+ ((dist > 0) ? "+" : "-"), new Point(20, 160), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	//Core.putText(webcam_image, "Slope: "+ ((slope > 0) ? "+" : "-"), new Point(20, 130), Core.FONT_HERSHEY_DUPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	//Core.putText(webcam_image, "Dist:  "+ ((dist > 0) ? "+" : "-"), new Point(20, 160), Core.FONT_HERSHEY_DUPLEX, 0.8, new Scalar(0,0,255), 2);
     			
-            		   	Core.putText(webcam_image, "Topleft", new Point(topleft.x+20, topleft.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-            		   	Core.putText(webcam_image, "Topright", new Point(topright.x+20, topright.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2); 
-            		   	Core.putText(webcam_image, "Bottomleft", new Point(bottomleft.x+20, bottomleft.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-            		   	Core.putText(webcam_image, "Bottomright", new Point(bottomright.x+20, bottomright.y+10), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);  
+            		   	Core.putText(webcam_image, "Topleft", new Point(topleft.x+20, topleft.y+10), Core.FONT_HERSHEY_DUPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	Core.putText(webcam_image, "Topright", new Point(topright.x+20, topright.y+10), Core.FONT_HERSHEY_DUPLEX, 0.8, new Scalar(0,0,255), 2); 
+            		   	Core.putText(webcam_image, "Bottomleft", new Point(bottomleft.x+20, bottomleft.y+10), Core.FONT_HERSHEY_DUPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   	Core.putText(webcam_image, "Bottomright", new Point(bottomright.x+20, bottomright.y+10), Core.FONT_HERSHEY_DUPLEX, 0.8, new Scalar(0,0,255), 2);  
          		   
             		   	MatOfPoint2f src = new MatOfPoint2f();
             		   	Point srcpoint[] = new Point[4];               	   
@@ -392,12 +392,12 @@ public class Main {
             		   //Circle all Markers
                 	   Core.circle(webcam_image, centersofmarkers.get(i), 4, new Scalar(255,49,0,255));
             		   //Draw Marker ID
-            		   Core.putText(webcam_image, String.valueOf(i), new Point(centersofmarkers.get(i).x-35, centersofmarkers.get(i).y+8), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+            		   Core.putText(webcam_image, String.valueOf(i), new Point(centersofmarkers.get(i).x-35, centersofmarkers.get(i).y+8), Core.FONT_HERSHEY_DUPLEX, 0.8, new Scalar(0,0,255), 2);
             	   }
             	   
             	   //Debug: Show Marker Count and Contour Count
-            	   //Core.putText(webcam_image, "Markers: "+ markers.size(), new Point(20, 40), Core.FONT_HERSHEY_COMPLEX, 1.5, red, 2);
-            	   //Core.putText(webcam_image, "Contours: "+ contours.size() +" found", new Point(20, 100), Core.FONT_HERSHEY_COMPLEX, 1.5, red, 2);
+            	   //Core.putText(webcam_image, "Markers: "+ markers.size(), new Point(20, 40), Core.FONT_HERSHEY_DUPLEX, 1.5, red, 2);
+            	   //Core.putText(webcam_image, "Contours: "+ contours.size() +" found", new Point(20, 100), Core.FONT_HERSHEY_DUPLEX, 1.5, red, 2);
 
             	   long drawTime = System.nanoTime();
             	   contours.clear();
