@@ -346,6 +346,7 @@ public class Main {
             		   	if (markers != null && !markers.isEmpty()){
             		   		four = centerofmarkers(markers).get(markers.size()-1);
 			   			}
+            		   	centersofmarkers.add(centerofmarkers(markers).get(markers.size()-1));
  	
             		   	Core.circle(webcam_image,center, 4, new Scalar(0,255,0,255));
             		   	Core.circle(webcam_image,centerSearchRect, 4, new Scalar(255,0,0,255));   
@@ -378,15 +379,19 @@ public class Main {
             		   	Imgproc.warpPerspective(webcam_image, qr_image, PerspectiveMat, new Size(400,400), Imgproc.INTER_CUBIC);
             	   }
             	   
-//            	   for(int i = 0; i < markers.size(); i++){
-//            		   System.out.println("Marker #"+i+" has "+markers.get(i).size()+" Polys");
-//            		   //Circle all Markers
-//                	   Core.circle(webcam_image, centersofmarkers.get(i), 4, new Scalar(255,49,0,255));
-//                	   //Draw Markers Contours
-//            		   Imgproc.drawContours( webcam_image, markers.get(i), -1, red, 2);
-//            		   //Draw Marker ID
-//            		   Core.putText(webcam_image, String.valueOf(i), new Point(centersofmarkers.get(i).x-35, centersofmarkers.get(i).y+8), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-//            	   }
+             	   for(int i = 0; i < markers.size(); i++){
+            		   //System.out.println("Marker #"+i+" has "+markers.get(i).size()+" Polys");
+                	   //Draw Markers Contours
+            		   Imgproc.drawContours( webcam_image, markers.get(i), -1, red, 1);
+            	   }
+            	   
+            	   for(int i = 0; i < centersofmarkers.size(); i++){
+            		   //System.out.println("Marker #"+i+" has "+markers.get(i).size()+" Polys");
+            		   //Circle all Markers
+                	   Core.circle(webcam_image, centersofmarkers.get(i), 4, new Scalar(255,49,0,255));
+            		   //Draw Marker ID
+            		   Core.putText(webcam_image, String.valueOf(i), new Point(centersofmarkers.get(i).x-35, centersofmarkers.get(i).y+8), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+            	   }
             	   
             	   //Debug: Show Marker Count and Contour Count
             	   //Core.putText(webcam_image, "Markers: "+ markers.size(), new Point(20, 40), Core.FONT_HERSHEY_COMPLEX, 1.5, red, 2);
