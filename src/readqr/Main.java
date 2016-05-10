@@ -182,14 +182,10 @@ public class Main {
        Mat canny_image=new Mat();
        Mat qr_image=new Mat(400,400, CvType.CV_8UC3, new Scalar(0,0,0));       
 
-       List<MatOfPoint> cascades = new ArrayList<MatOfPoint>();
        List<List<MatOfPoint>> markers = new ArrayList<List<MatOfPoint>>();
        List<List<MatOfPoint>> alignmentmarkers = new ArrayList<List<MatOfPoint>>();
        List<List<MatOfPoint>> testMarkers = new ArrayList<List<MatOfPoint>>();
        List<Point> centersofmarkers = new ArrayList<Point>();
-       List<MatOfPoint> dummy = new ArrayList<MatOfPoint>();
-       List<MatOfPoint2f> cascades2f = new ArrayList<MatOfPoint2f>();
-       List<MatOfPoint> cascadespoly = new ArrayList<MatOfPoint>();
        List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
        
        Mat hierarchy = new Mat();
@@ -208,9 +204,12 @@ public class Main {
         	   long startTime = System.nanoTime();
         	   webCam.read(webcam_image);  
         	   if( !webcam_image.empty() ){ 
-        		   long webcamTime = System.nanoTime();
-        		   //Thread.sleep(500); /// This delay eases the computational load .. with little performance leakage
         		   //System.out.println("New Frame started");
+        		   long webcamTime = System.nanoTime();
+        		   
+        		   //Thread.sleep(200); /// This delay eases the computational load .. with little performance leakage
+        		   
+        		   //Process Image
             	   Imgproc.cvtColor(webcam_image, grayscale_image, Imgproc.COLOR_RGB2GRAY);
             	   Imgproc.GaussianBlur(grayscale_image, grayscale_image, new Size(5,5), 0);
             	   Imgproc.equalizeHist(canny_image, canny_image);
@@ -236,8 +235,6 @@ public class Main {
             	   long TimeStartTree = System.nanoTime();
             	   
             	   ContourManager CM = new ContourManager(contours, hierarchy);
-
-            	   //markers = findNestedContours(contours, hierarchy, 5);
             	   CM.buildNestedContours();
             	   markers = CM.getNestedContours(5);
             	   //System.out.println("found "+markers.size()+" contours");
@@ -384,15 +381,15 @@ public class Main {
             		   	Imgproc.warpPerspective(webcam_image, qr_image, PerspectiveMat, new Size(400,400), Imgproc.INTER_CUBIC);
             	   }
             	   
-            	   //for(int i = 0; i < markers.size(); i++){
-            		   //System.out.println("Marker #"+i+" has "+markers.get(i).size()+" Polys");
-            		   //Circle all Markers
-                	   //Core.circle(webcam_image, centersofmarkers.get(i), 4, new Scalar(255,49,0,255));
-                	   //Draw Markers Contours
-            		   //Imgproc.drawContours( webcam_image, markers.get(i), -1, red, 2);
-            		   //Draw Marker ID
-            		   //Core.putText(webcam_image, String.valueOf(i), new Point(centersofmarkers.get(i).x-35, centersofmarkers.get(i).y+8), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
-            	   //}
+//            	   for(int i = 0; i < markers.size(); i++){
+//            		   System.out.println("Marker #"+i+" has "+markers.get(i).size()+" Polys");
+//            		   //Circle all Markers
+//                	   Core.circle(webcam_image, centersofmarkers.get(i), 4, new Scalar(255,49,0,255));
+//                	   //Draw Markers Contours
+//            		   Imgproc.drawContours( webcam_image, markers.get(i), -1, red, 2);
+//            		   //Draw Marker ID
+//            		   Core.putText(webcam_image, String.valueOf(i), new Point(centersofmarkers.get(i).x-35, centersofmarkers.get(i).y+8), Core.FONT_HERSHEY_COMPLEX, 0.8, new Scalar(0,0,255), 2);
+//            	   }
             	   
             	   //Debug: Show Marker Count and Contour Count
             	   //Core.putText(webcam_image, "Markers: "+ markers.size(), new Point(20, 40), Core.FONT_HERSHEY_COMPLEX, 1.5, red, 2);
@@ -400,8 +397,6 @@ public class Main {
 
             	   long drawTime = System.nanoTime();
             	   contours.clear();
-            	   cascades.clear();
-            	   cascadespoly.clear();
             	   markers.clear();
             	   alignmentmarkers.clear();
             	   
